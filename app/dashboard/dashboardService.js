@@ -7,9 +7,13 @@
     dashboardService.$inject = ['$http', '$q'];
 
     function dashboardService($http, $q) {
+        //Constantes
         const sv = this;
         const url = 'http://localhost:3003/api';
+        
+        //Variáveis
 
+        //Funções
         sv.getSummary = function() {
             var deffered = $q.defer();
             $http.get(url+'/billingSummary')

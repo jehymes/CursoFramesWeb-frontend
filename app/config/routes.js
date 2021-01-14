@@ -1,18 +1,21 @@
-angular.module('primeiraApp')
-.config([
+(function () {
+  'use strict';
+
+  angular.module('primeiraApp').config([
     '$stateProvider',
     '$urlRouterProvider',
-    function($stateProvider, $urlRouterProvider) {
-        $stateProvider
+    function ($stateProvider, $urlRouterProvider) {
+      $stateProvider
         .state('dashboard', {
-            url: "/dashboard",
-            templateUrl: "dashboard/dashboard.html"
+          url: '/dashboard',
+          templateUrl: 'dashboard/dashboard.html',
         })
         .state('billingCycles', {
-            url: "/billingCycles",
-            templateUrl: "billingCycles/tabs.html"
-        })
+          url: '/billingCycles',
+          templateUrl: 'billingCycles/tabs.html',
+        });
 
-        $urlRouterProvider.otherwise('/dashboard')
-    }
-])
+      $urlRouterProvider.otherwise('/dashboard');
+    },
+  ]);
+})(angular);

@@ -1,17 +1,19 @@
-angular.module('primeiraApp')
-.component('valueBox', {
-    bindings:{
-        grid: '@',
-        colorClass: '@',
-        value: '@',
-        text: '@',
-        iconClass: '@'
+(function () {
+  'use strict';
+  angular.module('primeiraApp').component('valueBox', {
+    bindings: {
+      grid: '@',
+      colorClass: '@',
+      value: '@',
+      text: '@',
+      iconClass: '@',
     },
     controller: [
-        'gridSystem',
-        function(gridSystem) {
-            this.$onInit = () => this.gridClasses = gridSystem.toCssClasses(this.grid)
-        }
+      'gridSystem',
+      function (gridSystem) {
+        this.$onInit = () =>
+          (this.gridClasses = gridSystem.toCssClasses(this.grid));
+      },
     ],
     template: `
     <div class="{{ $ctrl.gridClasses }}">
@@ -25,5 +27,6 @@ angular.module('primeiraApp')
             </div>
         </div>
     </div>
-    `
-})
+    `,
+  });
+})(angular);

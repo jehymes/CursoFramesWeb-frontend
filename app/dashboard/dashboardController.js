@@ -4,17 +4,21 @@
     angular.module('primeiraApp')
     .controller('DashboardController', dashboardController);
 
-    dashboardController.$inject = ['$scope', 'DashboardService'];
+    dashboardController.$inject = ['DashboardService'];
 
-    function dashboardController($scope, DashboardService) {
-        var vm = this;
+    function dashboardController(DashboardService) {
+        //Constantes
+        const vm = this;
 
-        vm.getSummary = getSummary;
-
+        //Variáveis
         vm.credit = '';
         vm.debt = '';
         vm.total = '';
 
+        //Escopo de Funções
+        vm.getSummary = getSummary;
+
+        //Funções
         function getSummary() {
             DashboardService.getSummary().then(function({credit = 0, debt = 0}){
                 vm.credit = credit;
