@@ -1,16 +1,20 @@
 (function () {
-  'use strict';
+  "use strict";
   angular
-    .module('primeiraApp')
-    .controller('BillingCyclesController', billingCyclesController);
+    .module("primeiraApp")
+    .controller("BillingCyclesController", billingCyclesController);
 
   billingCyclesController.$inject = [
-    'BillingCyclesService',
-    'MsgsFactory',
-    'TabsFactory',
+    "BillingCyclesService",
+    "MsgsFactory",
+    "TabsFactory"
   ];
 
-  function billingCyclesController(BillingCyclesService, msgs, tabs) {
+  function billingCyclesController(
+    BillingCyclesService,
+    msgs,
+    tabs
+  ) {
     //Constantes
     const vm = this;
 
@@ -22,7 +26,7 @@
     vm.initController = initController;
     vm.insert = insert;
     vm.refresh = refresh;
-    vm.update = update;
+    vm.update = update; //Verificar Funcionamento
     vm.deleteRegister = deleteRegister;
     vm.showTabUpdate = showTabUpdate;
     vm.showTabDelete = showTabDelete;
@@ -33,43 +37,30 @@
     }
 
     function insert(data) {
-      BillingCyclesService.create(data)
-        .then(function () {
-          msgs.addSuccess('Operação realizada com sucesso!');
-          refresh();
-        })
-        .catch(function (error) {
-          msgs.addError(error);
-        });
+      BillingCyclesService.create(data).then(function (response) {
+        verifyResponse(response);
+      });
     }
 
     function refresh() {
       BillingCyclesService.read().then(function (response) {
         vm.billingCycle = {};
-        vm.billingCycles = response;
+        vm.billingCycles = response.data;
         tabs.show(vm, { tabList: true, tabCreate: true });
       });
     }
 
+    //Verificar Funcionamento
     function update() {
-      BillingCyclesService.update(vm.billingCycle)
-      .then(function() {
-          refresh();
-          msgs.addSuccess('Operação realizada com sucesso!');
-      }).catch(function(err) {
-          msgs.addError(err.errors);
+      BillingCyclesService.update(vm.billingCycle).then(function (response) {
+        verifyResponse(response);
       });
     }
 
     function deleteRegister() {
-      BillingCyclesService.delete(vm.billingCycle)
-        .then(function () {
-          refresh();
-          msgs.addSuccess('Operação realizada com sucesso!');
-        })
-        .catch(function (error) {
-          msgs.addError(error);
-        });
+      BillingCyclesService.delete(vm.billingCycle).then(function (response) {
+        verifyResponse(response);
+      });
     }
 
     function showTabUpdate(billingCycle) {
@@ -80,6 +71,26 @@
     function showTabDelete(billingCycle) {
       vm.billingCycle = billingCycle;
       tabs.show(vm, { tabDelete: true });
+    }
+
+    function verifyResponse(response, callback) {
+      console.log(response);
+      if (
+        response.status === 200 ||
+        response.status === 201 ||
+        response.status === 204
+      ) {
+        msgs.addSuccess("Operação realizada com sucesso!");
+        refresh();
+      } else if (response.status === 500) {
+        msgs.addError(response.data.errors);
+      } else {
+        msgs.addError("Ops! Parece que encontramos um problema...");
+      }
+
+      if (callback && typeof callback === "function") {
+        callback();
+      }
     }
   }
 })(angular);
