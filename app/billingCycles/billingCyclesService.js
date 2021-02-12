@@ -16,12 +16,7 @@
 
     //Funções
     sv.create = function (data) {
-      return $http({
-        method: "POST",
-        url: url + "/billingCycles",
-        data: $httpParamSerializer(data),
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      })
+      return $http.post(url + "/billingCycles",data)
         .then(function (response) {
           return response;
         })
@@ -30,9 +25,9 @@
         });
     };
 
-    sv.read = function () {
+    sv.read = function (page) {
       return $http
-        .get(url + "/billingCycles")
+        .get(`${url}/billingCycles?skip=${(page - 1) * 5}&limit=5`)
         .then(function (response) {
           return response;
         })
@@ -43,14 +38,12 @@
 
     //Verificar funcionamento
     sv.update = function (data) {
-      return $http
-        .put(`${url}/billingCycles/${data._id}`, data)
-        .then(function (response) {
+      return $http.put(`${url}/billingCycles/${data._id}`,data)
+      .then(function (response) {
           return response;
-        })
-        .catch(function (error) {
+      }).catch(function (error) {
           return error;
-        });
+      })
     };
 
     sv.delete = function (data) {
@@ -63,5 +56,15 @@
           return error;
         });
     };
+
+    sv.count = function() {
+      return $http.get(url+"/billingCycles/count")
+      .then(function (response){
+        return response;
+      })
+      .catch(function (error) {
+        return error;
+      })
+    }
   }
 })();
