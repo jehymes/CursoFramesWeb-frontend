@@ -4,9 +4,9 @@
     angular.module('primeiraApp')
     .service('DashboardService', dashboardService);
 
-    dashboardService.$inject = ['$http', '$q'];
+    dashboardService.$inject = ['$http'];
 
-    function dashboardService($http, $q) {
+    function dashboardService($http) {
         //Constantes
         const sv = this;
         const url = 'http://localhost:3003/api';
@@ -15,13 +15,10 @@
 
         //Funções
         sv.getSummary = function() {
-            var deffered = $q.defer();
-            $http.get(url+'/billingSummary')
+            return $http.get(url+'/billingSummary')
             .then(function(response) {
-                deffered.resolve(response.data)
+                return response.data
             })
-
-            return deffered.promise;
         }
     }
 })()
