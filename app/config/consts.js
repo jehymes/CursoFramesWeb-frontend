@@ -4,7 +4,7 @@ angular.module('primeiraApp').constant('consts', {
   owner: 'JG Desenvolvimentos',
   year: '2021',
   site: 'https://jgdesenvolvimentos.com.br',
-  apiUrl: 'https://admin-money-backend.herokuapp.com/api/api',
+  apiUrl: 'https://admin-money-backend.herokuapp.com/api',
   oapiUrl: 'https://admin-money-backend.herokuapp.com/oapi',
   userKey: '_primeira_app_user'
 }).run(['$rootScope', 'consts', function($rootScope, consts) {
