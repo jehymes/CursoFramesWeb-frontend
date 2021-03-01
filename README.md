@@ -7,3 +7,5 @@ frontend
         }
     }
 } -->
+
+<!-- web: node app.js -->
