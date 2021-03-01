@@ -5,7 +5,7 @@ angular.module('primeiraApp').constant('consts', {
   year: '2021',
   site: 'https://jgdesenvolvimentos.com.br',
   apiUrl: 'https://admin-money-backend.herokuapp.com/api/api',
-  oapiUrl: 'https://admin-money-backend.herokuapp.com/api/oapi',
+  oapiUrl: 'https://admin-money-backend.herokuapp.com/oapi',
   userKey: '_primeira_app_user'
 }).run(['$rootScope', 'consts', function($rootScope, consts) {
   $rootScope.consts = consts
