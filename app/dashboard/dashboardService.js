@@ -4,12 +4,12 @@
     angular.module('primeiraApp')
     .service('DashboardService', dashboardService);
 
-    dashboardService.$inject = ['$http'];
+    dashboardService.$inject = ['$http', 'consts'];
 
-    function dashboardService($http) {
+    function dashboardService($http, consts) {
         //Constantes
         const sv = this;
-        const url = 'http://localhost:3003/api';
+        const url = consts.apiUrl;
         
         //Variáveis
 

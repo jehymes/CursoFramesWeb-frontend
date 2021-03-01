@@ -1,22 +1,22 @@
 (function () {
-  "use strict";
+  'use strict';
 
   angular
-    .module("primeiraApp")
-    .service("BillingCyclesService", billingCyclesService);
+    .module('primeiraApp')
+    .service('BillingCyclesService', billingCyclesService);
 
-  billingCyclesService.$inject = ["$http", "$httpParamSerializer"];
+  billingCyclesService.$inject = ['$http', 'consts'];
 
-  function billingCyclesService($http, $httpParamSerializer) {
+  function billingCyclesService($http, consts) {
     //Constantes
     const sv = this;
-    const url = "http://localhost:3003/api";
+    const url = consts.apiUrl;
 
     //Variáveis
 
     //Funções
     sv.create = function (data) {
-      return $http.post(url + "/billingCycles",data)
+      return $http.post(url + '/billingCycles',data)
         .then(function (response) {
           return response;
         })
@@ -48,7 +48,7 @@
 
     sv.delete = function (data) {
       return $http
-        .delete(url + "/billingCycles/" + data._id, data)
+        .delete(url + '/billingCycles/' + data._id, data)
         .then(function (response) {
           return response;
         })
@@ -58,7 +58,7 @@
     };
 
     sv.count = function() {
-      return $http.get(url+"/billingCycles/count")
+      return $http.get(url+'/billingCycles/count')
       .then(function (response){
         return response;
       })
